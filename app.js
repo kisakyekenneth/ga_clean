@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 
 //Middlewares
-app.use(express.static("public")); //Serve static files like css, js.
+app.use('/static', express.static("public")); //Serve static files like css, js.
 app.use(express.static("files"));
 
 //Set view Enginee
@@ -17,6 +17,10 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000 ...");
+app.get("/home", (req, res) => {
+  res.render("homepage");
+})
+
+app.listen(process.env.HOST_PORT, () => {
+  console.log("Listening on port ", process.env.HOST_PORT);
 });
