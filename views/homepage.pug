@@ -1,0 +1,42 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  style
+    include ../public/css/homepage.css
+
+  title Dashboard
+.md-layout.page-content
+  .md-layout-item.st-sidebar
+    .md-layout-item.flex-container
+      // The flex container is useful when you have 2 div and need space between using style (justice-content: space-between)
+      div
+        a.md-button.navbar-item.md-theme-default(href='#')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img( src='../public/favicons/home.png' style='width: 35px; height: 35px;' )
+        a.md-button.navbar-item.md-theme-default(href='#')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(style='width: 35px; height: 35px;' src='../public/favicons/register.png')
+        a.md-button.navbar-item.md-theme-default(href='#')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(style='width: 35px; height: 35px;' src='../public/favicons/customer.png')
+        a.md-button.navbar-item.md-theme-default(href='#')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(style='width: 35px; height: 35px;' src='../public/favicons/bars.png')
+      // Finance section
+      div
+        a.md-button.navbar-item.md-theme-default(href='#')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(src='../public/favicons/settings.png')
+  .md-layout-item.main-content
