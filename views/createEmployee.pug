@@ -1,2 +1,44 @@
 extends layout
-block content
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h2  Register Employees
+  .md-layout.md-layout-nowrap
+    .form-style-2
+      .form-style-2-heading Provide your information
+      form(action='#' method='#' name='tuesday')
+        label(for='userName')
+          span
+            | Name 
+            span.required *
+          input.input-field(type='text' name='userName' value='')
+        label(for='nin_number')
+          span
+            | NIN 
+            span.required *
+          input.input-field(type='text' name='nin_number' value='')
+        label(for='residence')
+          span
+            | Residence 
+            span.required *
+          input.input-field(type='text' name='residence' value='')
+        label(for='onboard_date')
+          span
+            | Date 
+            span.required *
+          input.input-field(type='date' name='onboard_date' value='')
+        label
+          span Telephone
+          input.tel-number-field(type='text' name='tel_no_1' value='' maxlength='4')
+          | -
+          input.tel-number-field(type='text' name='tel_no_2' value='' maxlength='4')
+          | -
+          input.tel-number-field(type='text' name='tel_no_3' value='' maxlength='10')
+        label(for='employee_type')
+          span Employee
+          select.select-field(name='employee_type')
+            option(value='Truck Driver') Driver
+            option(value='conductor') Conductor
+        label
+          span  
+          input(type='button' value='Submit')
