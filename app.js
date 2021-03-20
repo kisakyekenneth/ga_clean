@@ -15,11 +15,21 @@ app.set("views", "./views");
 
 //Routes
 app.get("/", (req, res) => {
-  res.render("login", { title: "Login" }); //Dynamically passing the page title as object
+  res.render("login", {
+    title: "Login"
+  }); //Dynamically passing the page title as object
 });
 
-app.get("/home", (req, res) => {
-  res.render("homepage", { title: "createEmployee" });
+app.get("/customer", (req, res) => {
+  res.render("employeeList", {
+    title: "Customer List"
+  });
+});
+
+app.get("/employeeRegister", (req, res) => {
+  res.render("createEmployee", {
+    title: "Employee Registration"
+  });
 });
 
 app.listen(process.env.HOST_PORT, () => {
