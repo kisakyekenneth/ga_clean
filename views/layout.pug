@@ -12,32 +12,32 @@ head
     .md-layout-item.flex-container
       // The flex container is useful when you have 2 div and need space between using style (justice-content: space-between)
       div
-        a.md-button.navbar-item.md-theme-default(href='#')
+        a.md-button.navbar-item.md-theme-default(href='/customer')
           .md-ripple
             .md-button-content
               i.md-svg-loader.md-icon.md-icon-image
                 img( src='images/home.png', style='width: 35px; height: 35px;' )
+        a.md-button.navbar-item.md-theme-default(href='/employeeRegister')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(src='images/register.png', style='width: 35px; height: 35px;')
         a.md-button.navbar-item.md-theme-default(href='#')
           .md-ripple
             .md-button-content
               i.md-svg-loader.md-icon.md-icon-image
-                img(style='width: 35px; height: 35px;', src='/public/images/register.png')
+                img(src='images/customer.png', style='width: 35px; height: 35px;')
         a.md-button.navbar-item.md-theme-default(href='#')
           .md-ripple
             .md-button-content
               i.md-svg-loader.md-icon.md-icon-image
-                img(style='width: 35px; height: 35px;' src='/public/images/customer.png')
-        a.md-button.navbar-item.md-theme-default(href='#')
-          .md-ripple
-            .md-button-content
-              i.md-svg-loader.md-icon.md-icon-image
-                img(style='width: 35px; height: 35px;' src='/public/images/bars.png')
+                img(src='images/bars.png', style='width: 35px; height: 35px;')
       // Finance section
       div
         a.md-button.navbar-item.md-theme-default(href='#')
           .md-ripple
             .md-button-content
               i.md-svg-loader.md-icon.md-icon-image
-                img(src='/public/images/settings.png')
+                img(src='images/settings.png', style='width: 35px; height: 35px;')
   .md-layout-item.main-content
     block content
