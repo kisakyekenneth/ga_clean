@@ -10,7 +10,7 @@ head
 h2 StayClean Initiative
 #container.container
   .form-container.sign-up-container
-    form(action='#')
+    form(method='POST' action='/users' )
       h1 Create Account
       .social-container
         a.social(href='#')
@@ -20,12 +20,12 @@ h2 StayClean Initiative
         a.social(href='#')
           i.fab.fa-linkedin-in
       span or use your email for registration
-      input(type='text' placeholder='Name')
-      input(type='email' placeholder='Email')
-      input(type='password' placeholder='Password')
-      button Register
+      input(type='text' placeholder='Name' name='username')
+      input(type='email' placeholder='Email' name='email')
+      input(type='password' placeholder='Password' name='password')
+      button(type='submit') Register
   .form-container.sign-in-container
-    form(action='#')
+    form(method='POST' action='/users/login' )
       h1 Sign in
       .social-container
         a.social(href='#')
@@ -35,10 +35,10 @@ h2 StayClean Initiative
         a.social(href='#')
           i.fab.fa-linkedin-in
       span or use your account
-      input(type='email' placeholder='Email')
-      input(type='password' placeholder='Password')
+      input(type='email' placeholder='Email' name="email")
+      input(type='password' placeholder='Password' name="password")
       a(href='#') Forgot your password?
-      button Sign In
+      button(type='submit') Sign In
   .overlay-container
     .overlay
       .overlay-panel.overlay-left

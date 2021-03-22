@@ -6,7 +6,7 @@ block content
   .md-layout.md-layout-nowrap
     .form-style-2
       .form-style-2-heading Provide your information
-      form(action='#' method='#' name='tuesday')
+      form(action='/users/login' method='POST')
         label(for='userName')
           span
             | Name 
@@ -41,4 +41,4 @@ block content
             option(value='conductor') Conductor
         label
           span  
-          input(type='button' value='Submit')
+          input(type='submit' value='Submit')
