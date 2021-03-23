@@ -1,26 +1,53 @@
 //Imports
 const express = require("express");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+require("dotenv").config(); //Required to work with .env file
+
+//Route middlewares
+var employeeRoute = require("./routes/employeeRoutes");
+var homeRoutes = require("./routes/homeRoutes");
+var userRoutes = require("./routes/userRoutes");
+var customerRoutes = require("./routes/customerRoutes");
 
 //Instantiation
 const app = express();
 
 //Middlewares
-app.use('/static', express.static("public")); //Serve static files like css, js.
+app.use(express.static("public")); //Serve static files like css, js.
 app.use(express.static("files"));
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
 
 //Set view Enginee
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-//Routes
-app.get("/", (req, res) => {
-  res.render("login");
-});
+//        Routes
+app.use("/", homeRoutes);
+app.use("/users", userRoutes);
+app.use("/employeeRegister", employeeRoute);
+app.use("/customer", customerRoutes);
 
-app.get("/home", (req, res) => {
-  res.render("homepage");
+//Non existing routes
+app.get("*", (req, res) => {
+  res.send("Error Page, route doesnot exist")
 })
 
-app.listen(process.env.HOST_PORT, () => {
-  console.log("Listening on port ", process.env.HOST_PORT);
+//Mongo database connection using Mongoose
+mongoose.connect(
+  process.env.DB_URL, {
+    useNewUrlParser: true
+  },
+  () => {
+    console.log("Connected to the DB");
+  }
+);
+
+app.listen(process.env.PORT, () => {
+  console.log("Listening on port ", process.env.PORT);
 });

@@ -1,42 +1,31 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const validator = require('validator');
 
 const userSchema = mongoose.Schema({
-    name: {
+    user_id: {
+        type: String
+    },
+    username: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     password: {
         type: String,
-        required: true,
-        minLength: 7
+        required: true
     },
     email: {
         type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        validate: value => {
-            if (!validator.isEmail(value)) {
-                throw new Error({
-                    error: 'Invalid Email address'
-                })
-            }
-        }
-
+        required: true
     }
 })
 
-userSchema.pre('save', async function (next) {
-    //Hash the password before saving the model
-    const user = this;
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8);
-    }
-    next();
-})
+// userSchema.pre('save', async function (next) {
+//     //Hash the password before saving the model
+//     const user = this;
+//     if (user.isModified('password')) {
+//         user.password = await bcrypt.hash(user.password, 8);
+//     }
+//     next();
+// })
 
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({
