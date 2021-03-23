@@ -1,0 +1,53 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  style
+    include  ../public/css/login.css
+
+  title=title
+h2 StayClean Initiative
+#container.container
+  .form-container.sign-up-container
+    form(method='POST' action='/users' )
+      h1 Create Account
+      .social-container
+        a.social(href='#')
+          i.fab.fa-facebook-f
+        a.social(href='#')
+          i.fab.fa-google-plus-g
+        a.social(href='#')
+          i.fab.fa-linkedin-in
+      span or use your email for registration
+      input(type='text' placeholder='Name' name='username')
+      input(type='email' placeholder='Email' name='email')
+      input(type='password' placeholder='Password' name='password')
+      button(type='submit') Register
+  .form-container.sign-in-container
+    form(method='POST' action='/users/login' )
+      h1 Sign in
+      .social-container
+        a.social(href='#')
+          i.fab.fa-facebook-f
+        a.social(href='#')
+          i.fab.fa-google-plus-g
+        a.social(href='#')
+          i.fab.fa-linkedin-in
+      span or use your account
+      input(type='email' placeholder='Email' name="email")
+      input(type='password' placeholder='Password' name="password")
+      a(href='#') Forgot your password?
+      button(type='submit') Sign In
+  .overlay-container
+    .overlay
+      .overlay-panel.overlay-left
+        h1 Already registered!
+        p Please proceed to login to be able to use the portal.
+        button#signIn.ghost Sign In
+      .overlay-panel.overlay-right
+        h1 Not Registered yet!
+        p Please register to be able to use the system
+        button#signUp.ghost Register
+script
+  include ../public/js/login.js
