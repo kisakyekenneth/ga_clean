@@ -6,7 +6,7 @@ block content
   .md-layout.md-layout-nowrap
     .form-style-2
       .form-style-2-heading Provide your information
-      form(action='/users/login' method='POST')
+      form(action='/employeeRegister' method='POST' enctype="multipart/form-data" )
         label(for='userName')
           span
             | Name 
@@ -39,6 +39,9 @@ block content
           select.select-field(name='employee_type')
             option(value='Truck Driver') Driver
             option(value='conductor') Conductor
+        label(for="imageUpload") Upload image
+        input#myFile(type='file' name='imageupload')      
+
         label
           span  
           input(type='submit' value='Submit')
