@@ -14,14 +14,21 @@ const employeeSchema = mongoose.Schema({
         type: String,
         required: 'Please provide your residence'
     },
-    onboard_date: {
+    driving_license: {
+        type: String,
+        required: 'Please provide your Driver license Number'
+    },
+    date_of_birth: {
         type: Date,
         default: Date.now
     },
     employee_type: {
         type: String,
-        required: 'Please select the driver type'
+        required: 'Please select the role(Driver or conductor)'
     },
+    past_incidences: [{
+        type: String
+    }],
     imageupload: String
 });
 
