@@ -39,14 +39,27 @@ app.get("*", (req, res) => {
 })
 
 //Mongo database connection using Mongoose
-mongoose.connect(
-  process.env.DB_URL, {
-    useNewUrlParser: true
-  },
-  () => {
-    console.log("Connected to the DB");
-  }
-);
+// mongoose.connect(
+//   process.env.DB_URL, {
+//     useNewUrlParser: true
+//   },
+//   () => {
+//     console.log("Connected to the DB");
+//   }
+// );
+
+mongoose.connect(process.env.LOCAL_DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+mongoose.connection
+  .on('open', () => {
+    console.log('Mongoose connection open');
+  })
+  .on('error', (err) => {
+    console.log(`Connection error: ${err.message}`);
+  });
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on port ", process.env.PORT);
