@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 require("dotenv").config(); //Required to work with .env file
 
+//require('../models/EmployeeRegist');
+
 //Route middlewares
 var employeeRoute = require("./routes/employeeRoutes");
 var homeRoutes = require("./routes/homeRoutes");
@@ -30,7 +32,7 @@ app.set("views", "./views");
 //        Routes
 app.use("/", homeRoutes);
 app.use("/users", userRoutes);
-app.use("/employeeRegister", employeeRoute);
+app.use("/employee", employeeRoute);
 app.use("/customer", customerRoutes);
 
 //Non existing routes
