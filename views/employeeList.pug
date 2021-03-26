@@ -1,0 +1,27 @@
+extends layout
+block content   
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h2  Employee List
+  .md-layout.md-layout-nowrap
+    table#customer_list
+      thead
+        tr
+          th EmployeeName
+          th  NIN 
+          th  Residence
+          th  Date of birth 
+          th  Employee type 
+          th  
+          th  
+      tbody
+        if employees.length
+        each employee in employees
+            tr  
+                td #{employee.userName}
+                td #{employee.nin_number}
+                td #{employee.residence}
+                td #{employee.onboard_date}
+                td #{employee.employee_type}
+
+        
