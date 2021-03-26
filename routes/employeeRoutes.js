@@ -1,6 +1,10 @@
 const express = require("express");
 const route = express.Router();
 const multer = require('multer');
+const mongoose = require('mongoose');
+
+
+const Employee = require('../models/EmployeeRegist');
 
 route.get("/", (req, res) => {
   res.render("createEmployee", {
@@ -21,13 +25,17 @@ var upload = multer({
   storage: storage
 });
 
-route.post("/", upload.single("imageupload"), (req, res) => {
-  try {
-    console.log(req.file);
-    res.send(req.file);
-  } catch (err) {
-    res.send(400);
-  }
-});
+route.post('/', upload.single('imageupload'), (req, res) => {
+  const employee = new Employee(req.body);
+  employee.imageupload = req.file.path;
+  employee.save()
+    .then(() => {
+      res.send('Thank you for your registration!')
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send('Sorry! Something went wrong.');
+    })
+})
 
 module.exports = route;
