@@ -25,17 +25,29 @@ var upload = multer({
   storage: storage
 });
 
-route.post('/', upload.single('imageupload'), (req, res) => {
-  const employee = new Employee(req.body);
-  employee.imageupload = req.file.path;
-  employee.save()
-    .then(() => {
-      res.send('Thank you for your registration!')
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send('Sorry! Something went wrong.');
-    })
+route.post('/', upload.single('imageupload'), async (req, res) => {
+  try {
+    const employee = new Employee(req.body);
+    employee.imageupload = req.file.path;
+    employee.save()
+    res.redirect('/employee/list')
+  } catch (error) {
+    console.log(error)
+    res.send('Sorry! Something went wrong.');
+  }
 })
+
+route.get("/list", async (req, res) => {
+  try {
+    // find all the data in the Employee collection
+    const employeeDetails = await Employee.find();
+    res.render('employeeList', {
+      employees: employeeDetails,
+      title: 'Employee List'
+    })
+  } catch (err) {
+    res.send('Failed to retrive employee details');
+  }
+});
 
 module.exports = route;
