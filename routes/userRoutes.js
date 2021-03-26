@@ -1,5 +1,8 @@
 const express = require("express");
-const db_model = require('../models/users');
+const mongoose = require('mongoose');
+require('../models/users');
+const User = mongoose.model('User')
+
 
 const route = express.Router();
 const app = express();
@@ -12,19 +15,19 @@ route.post("/login", async (req, res) => {
     //Login a registered user
     try {
 
-        const email = req.body.email;
-        const password = req.body.password;
+        // const email = req.body.email;
+        // const password = req.body.password;
 
 
-        const find_user = await db_model.findOne({
-            email: email
-        })
-        if (!find_user) {
-            res.json({
-                message: "User EMail not found please verify and try again"
-            });
-        }
-        console.log(user)
+        // const find_user = await db_model.findOne({
+        //     email: email
+        // })
+        // if (!find_user) {
+        //     res.json({
+        //         message: "User EMail not found please verify and try again"
+        //     });
+        // }
+        // console.log(user)
         res.redirect("/customer");
 
     } catch (error) {
@@ -37,23 +40,23 @@ route.post("/login", async (req, res) => {
 route.post("/", async (req, res) => {
     //register a user
     try {
-        res.json(req.body)
-        let passwd = await bcrypt.hash(req.body.password, 8)
-        let customer_name = req.body.username;
-        const user_data = new db_model({
+
+        // let passwd = await bcrypt.hash(req.body.password, 8)
+        // let customer_name = req.body.username;
+        const user_data = new User({
             username: req.body.username,
             email: req.body.email,
-            password: passwd
+            password: req.body.password
         });
-        console.log(saved_userData)
-        const saved_userData = await user_data.save();
-        console.log(saved_userData)
 
-        //res.redirect("/customer");
+        await user_data.save(() => {
+            res.send("Successful")
+        })
+
+
+        // res.redirect("/customer");
     } catch (error) {
-        res.json({
-            message: "Failure check the connection"
-        });
+        console.log(error, "Failed to save")
     }
 });
 
