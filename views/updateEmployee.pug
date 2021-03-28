@@ -1,0 +1,67 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      .form-style-2-heading Provide your information
+  .md-layout.md-layout-nowrap
+    .form-style-2      
+      form(action="/employee/update?id="+employee._id method='POST' enctype="multipart/form-data" )
+        label(for='userName')
+          span
+            | Name 
+            span.required *
+          input.input-field(type='text' name='userName' value=employee.userName)
+        label(for='nin_number')
+          span
+            | NIN 
+            span.required *
+          input.input-field(type='text' name='nin_number' value=employee.nin_number)
+        label(for='residence')
+          span
+            | Residence 
+            span.required *
+          input.input-field(type='text' name='residence' value=employee.residence)
+        label(for='license Number')
+          span
+            | Driving License No. 
+            span.required *
+          input.input-field(type='text' name='driving_license' value=employee.driving_license)
+        label(for='onboard_date')
+          span
+            | Date of Birth 
+            span.required *
+          input.input-field(type='date' name='date_of_birth' value=employee.date_of_birth)
+        label
+          span Telephone
+          input.tel-number-field.phone_field1(type='text' name='tel_no_1' value='+256' maxlength='4')
+          | -
+          input.tel-number-field.phone_field2(type='text' name='tel_no_2' value=employee.tel_no_2 maxlength='3')
+          | -
+          input.tel-number-field.phone_field2(type='text' name='tel_no_3' value=employee.tel_no_3 maxlength='6')
+        label(for='employee_type')
+          span Employee
+          select.select-field(name='employee_type')
+            option(value='Truck Driver') Driver
+            option(value='conductor') Conductor
+        label Past incidences
+        .chckboxes
+          .option1
+            label.checkbox-inline
+              input#inlineCheckbox1(type='checkbox' value='accidents' name='past_incidences')
+              span.checkbox_labels Accidents &nbsp &nbsp
+          .option2
+            label.checkbox-inline
+              input#inlineCheckbox2(type='checkbox' value='theft' name='past_incidences')
+              span.checkbox_labels Fights &nbsp &nbsp
+          .option3
+            label.checkbox-inline
+              input#inlineCheckbox3(type='checkbox' value='fights' name='past_incidences') 
+              span.checkbox_labels Fuel thefts   &nbsp &nbsp
+        br      
+        br
+        input#myFile(type='file' name='imageupload')      
+        br
+        br
+        label
+          span  
+          input#button_submit(type='submit' value='Update')
