@@ -18,6 +18,7 @@ const app = express();
 //Middlewares
 app.use(express.static("public")); //Serve static files like css, js.
 app.use(express.static("files"));
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(express.json());
 app.use(
   express.urlencoded({
