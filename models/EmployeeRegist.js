@@ -29,7 +29,23 @@ const employeeSchema = mongoose.Schema({
     past_incidences: [{
         type: String
     }],
-    imageupload: String
+    imageupload: String,
+    tel_no_1: {
+        type: String,
+        required: 'Please provide Default phone code'
+    },
+    tel_no_2: {
+        type: String,
+        required: 'Please provide Default phone digit'
+    },
+    tel_no_3: {
+        type: String,
+        required: 'Please provide the rest of phone number details'
+    },
+    telephone: {
+        type: String,
+        required: 'Please provide phone number'
+    }
 });
 
 module.exports = mongoose.model('Employee', employeeSchema)
