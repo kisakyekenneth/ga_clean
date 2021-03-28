@@ -12,7 +12,8 @@ block content
           th  Residence
           th  Date of birth 
           th  Employee type 
-          th  
+          th  Contact
+          th
           th  
       tbody
         if employees.length
@@ -21,7 +22,14 @@ block content
                 td #{employee.userName}
                 td #{employee.nin_number}
                 td #{employee.residence}
-                td #{employee.onboard_date}
+                td #{employee.date_of_birth}
                 td #{employee.employee_type}
+                td #{employee.telephone}
+                td
+                    a(href='/employee/update/'+employee._id) Update 
+                td
+                  form(method="POST" action='/employee/delete')
+                    input(type="hidden", placeholder="", name="id", value=employee._id)
+                    button.btn.btn-dark.btn-block(type="submit") Delete
 
         
