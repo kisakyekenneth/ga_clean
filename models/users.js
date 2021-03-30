@@ -7,15 +7,12 @@ const userSchema = mongoose.Schema({
     },
     username: {
         type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
+        required: 'Please Enter UserName'
     },
     email: {
         type: String,
-        required: true
+        unique: true,
+        required: 'Please Enter User Email'
     }
 })
 
@@ -25,3 +22,9 @@ userSchema.plugin(passportLocalMongoose, {
 const User = mongoose.model('User', userSchema)
 
 module.exports = User;
+
+//Removing Password from the Schema not sending it to the database to prevent visibility
+// password: {
+//     type: String,
+//     required: 'Please provide the password'
+// },
