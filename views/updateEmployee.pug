@@ -5,7 +5,7 @@ block content
       .form-style-2-heading Provide your information
   .md-layout.md-layout-nowrap
     .form-style-2      
-      form(action="/employee/update?id="+employee._id method='POST' enctype="multipart/form-data" )
+      form(action="/employee/update?id="+employee._id method='POST')
         label(for='userName')
           span
             | Name 
@@ -41,25 +41,22 @@ block content
         label(for='employee_type')
           span Employee
           select.select-field(name='employee_type')
-            option(value='Truck Driver') Driver
-            option(value='conductor') Conductor
+            option(value='Truck Driver' selected = employee.employee_type === "Truck Driver") Driver
+            option(value='conductor' selected = employee.employee_type === "conductor") Conductor
         label Past incidences
         .chckboxes
           .option1
             label.checkbox-inline
-              input#inlineCheckbox1(type='checkbox' value='accidents' name='past_incidences')
+              input#inlineCheckbox1(type='checkbox' value='accidents' checked =employee.past_incidences.includes('accidents') name='past_incidences')
               span.checkbox_labels Accidents &nbsp &nbsp
           .option2
             label.checkbox-inline
-              input#inlineCheckbox2(type='checkbox' value='theft' name='past_incidences')
+              input#inlineCheckbox2(type='checkbox' value='fights' checked =employee.past_incidences.includes('fights') name='past_incidences')
               span.checkbox_labels Fights &nbsp &nbsp
           .option3
             label.checkbox-inline
-              input#inlineCheckbox3(type='checkbox' value='fights' name='past_incidences') 
-              span.checkbox_labels Fuel thefts   &nbsp &nbsp
-        br      
-        br
-        input#myFile(type='file' name='imageupload')      
+              input#inlineCheckbox3(type='checkbox' value='fuel thefts' checked =employee.past_incidences.includes('fuel thefts') name='past_incidences') 
+              span.checkbox_labels Fuel thefts   &nbsp &nbsp          
         br
         br
         label
