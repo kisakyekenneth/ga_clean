@@ -34,7 +34,9 @@ app.use(
     extended: true
   })
 );
-//Passport
+
+//Passport and Express-session to create session on success login
+app.use(expressSession);
 app.use(passport.initialize()); //initialize it along with its session authentication middleware,
 app.use(passport.session());
 
