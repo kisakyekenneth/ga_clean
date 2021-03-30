@@ -50,7 +50,8 @@ route.post("/", async (req, res) => {
         });
 
         await user_data.save(() => {
-            res.send("Successful")
+            //res.send("Successful")
+            res.redirect('/')
         })
 
 

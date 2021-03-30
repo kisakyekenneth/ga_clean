@@ -2,12 +2,10 @@ const express = require("express");
 const route = express.Router();
 
 route.get("/", (req, res) => {
-    res.render("customerList", {
-        title: "Customer List"
-    });
+    res.render("customerList");
 });
 
-route.get("/recordCalls", (req, res) => {
+route.get("/calls", (req, res) => {
     res.render("customerCalls", {
         title: "Record customer calls"
     });
