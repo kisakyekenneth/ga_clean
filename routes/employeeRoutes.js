@@ -6,9 +6,13 @@ var moment = require("moment");
 const Employee = require("../models/EmployeeRegist");
 
 route.get("/", (req, res) => {
-  res.render("createEmployee", {
-    title: "Employee Registration"
-  });
+  if (req.session.user) {
+    res.render("createEmployee", {
+      title: "Employee Registration"
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 // image upload
@@ -24,89 +28,113 @@ var upload = multer({
   storage: storage
 });
 
+//Register Employee
 route.post("/", upload.single("imageupload"), async (req, res) => {
-  try {
-    const employee = new Employee(req.body);
-    employee.imageupload = req.file.path;
-    employee.telephone =
-      req.body.tel_no_1 + req.body.tel_no_2 + req.body.tel_no_3;
-    var fomatted_date = moment(req.body.date_of_birth).format("DD/MM/YYYY");
-    console.log(fomatted_date);
+  if (req.session.user) {
+    try {
+      const employee = new Employee(req.body);
+      employee.imageupload = req.file.path;
+      employee.telephone =
+        req.body.tel_no_1 + req.body.tel_no_2 + req.body.tel_no_3;
+      var fomatted_date = moment(req.body.date_of_birth).format("DD/MM/YYYY");
 
-    employee.date_of_birth = fomatted_date;
-    employee.save();
-    res.redirect("/employee/list");
-  } catch (error) {
-    console.log(error);
-    res.send("Sorry! Something went wrong.");
+      employee.date_of_birth = fomatted_date;
+      employee.save();
+      res.redirect("/employee/list");
+    } catch (error) {
+      console.log(error);
+      res.send("Sorry! Something went wrong.");
+    }
+  } else {
+    res.redirect('/')
   }
 });
 
+// Find all the data in the Employee collection.
 route.get("/list", async (req, res) => {
-  try {
-    // find all the data in the Employee collection
-    const employeeDetails = await Employee.find();
+  if (req.session.user) {
+    try {
+      const employeeDetails = await Employee.find();
 
-    res.render("employeeList", {
-      employees: employeeDetails,
-      title: "Employee List"
-    });
-  } catch (err) {
-    res.send("Failed to retrive employee details");
+      res.render("employee_list", {
+        employees: employeeDetails,
+        title: "Employee List"
+      });
+    } catch (err) {
+      res.send("Failed to retrive employee details");
+    }
+  } else {
+    res.redirect('/')
   }
 });
 
-//delete and employee record from the database
+//Delete an employee record from the database
 route.post("/delete", async (req, res) => {
-  try {
-    await Employee.deleteOne({
-      _id: req.body.id
-    });
-    res.redirect("back");
-  } catch (err) {
-    res.status(400).send("Unable to delete item in the database");
+  if (req.session.user) {
+    try {
+      await Employee.deleteOne({
+        _id: req.body.id
+      });
+      res.redirect("back");
+    } catch (err) {
+      res.status(400).send("Unable to delete item in the database");
+    }
+  } else {
+    res.redirect('/')
   }
 });
 
-//Retrieve Employee details to be updated
+//Given employee id, Retrieve Employee details to be updated.
 route.get("/update/:id", async (req, res) => {
-  try {
-    const updateEmployee = await Employee.findOne({
-      _id: req.params.id
-    });
-    res.render("updateEmployee", {
-      employee: updateEmployee
-    });
-  } catch (err) {
-    res.status(400).send("Unable to find item in the database");
+  if (req.session.user) {
+    try {
+      const updateEmployee = await Employee.findOne({
+        _id: req.params.id
+      });
+      res.render("updateEmployee", {
+        employee: updateEmployee
+      });
+    } catch (err) {
+      res.status(400).send("Unable to find item in the database");
+    }
+  } else {
+    res.redirect('/')
   }
 });
 
 // Save the updated employee information
 route.post("/update", async (req, res) => {
-  try {
-    await Employee.findOneAndUpdate({
-        _id: req.query.id
-      },
-      req.body
-    );
-    res.redirect("/employee/list");
-  } catch (err) {
-    res.status(404).send("Unable to update item in the database");
+  if (req.session.user) {
+    try {
+      await Employee.findOneAndUpdate({
+          _id: req.query.id
+        },
+        req.body
+      );
+      res.redirect("/employee/list");
+    } catch (err) {
+      res.status(404).send("Unable to update item in the database");
+    }
+  } else {
+    res.redirect('/')
   }
 });
 
-//Search employee details
+//Search for employee details
 route.post("/search", async (req, res) => {
-  try {
-    const employee_filter = await Employee.findOne({
-      _id: req.query.name
-    });
-    res.render("employeeList", {
-      employee: employee_filter
-    });
-  } catch (err) {
-    res.status(404).send("Unable to update item in the database");
+  if (req.session.user) {
+    try {
+      const employee_filter = await Employee.findOne({
+        _id: req.query.name
+      });
+      res.render("employee_list", {
+        employee: employee_filter
+      });
+    } catch (err) {
+      res.status(404).send("Unable to update item in the database");
+    }
+  } else {
+    res.redirect('/')
   }
 })
 

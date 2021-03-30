@@ -55,7 +55,11 @@ route.post("/", async (req, res) => {
   }
 });
 
-//logout
+/**
+ * Logout
+ * Check if the session exists then destroy the session.
+ * Have a callback fuction incase error is encoutered during the session destroy.
+ */
 route.get("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy(err => {
