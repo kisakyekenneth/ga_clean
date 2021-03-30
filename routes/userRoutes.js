@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 require('../models/users');
 const User = mongoose.model('User')
 
+const passport = require('passport');
+
 
 const route = express.Router();
 const app = express();
@@ -11,53 +13,42 @@ app.use(express.urlencoded({
 }));
 
 
-route.post("/login", async (req, res) => {
-    //Login a registered user
-    try {
+// checks username and password using passport
+route.post('/login', passport.authenticate('local', {
+    failureRedirect: '/'
+}), (req, res) => {
+    req.session.user = req.user;
+    res.redirect('/customer');
+})
 
-        // const email = req.body.email;
-        // const password = req.body.password;
-
-
-        // const find_user = await db_model.findOne({
-        //     email: email
-        // })
-        // if (!find_user) {
-        //     res.json({
-        //         message: "User EMail not found please verify and try again"
-        //     });
-        // }
-        // console.log(user)
-        res.redirect("/customer");
-
-    } catch (error) {
-        res.json({
-            message: "error"
-        });
-    }
-});
-
+//Register a user
 route.post("/", async (req, res) => {
-    //register a user
     try {
 
         // let passwd = await bcrypt.hash(req.body.password, 8)
         // let customer_name = req.body.username;
-        const user_data = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        });
 
-        await user_data.save(() => {
-            //res.send("Successful")
+        // const user_data = new User({
+        //     username: req.body.username,
+        //     email: req.body.email,
+        //     password: req.body.password
+        // });
+
+        // await user_data.save(() => {
+        //     //res.send("Successful")
+        //     res.redirect('/')
+        // })
+
+        const registrationDetails = new User(req.body);
+        await User.register(registrationDetails, req.body.password, (err) => {
+            if (err) {
+                throw err
+            }
             res.redirect('/')
-        })
-
-
-        // res.redirect("/customer");
+        });
     } catch (error) {
-        console.log(error, "Failed to save")
+        res.status(400).send('Sorry! Something went wrong.')
+        console.log(error)
     }
 });
 
@@ -65,8 +56,6 @@ route.post("/", async (req, res) => {
 route.get("*", (req, res) => {
     res.send("Please check your specified path");
 });
-
-
 
 
 module.exports = route;
