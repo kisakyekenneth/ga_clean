@@ -18,8 +18,10 @@ const expressSession = require('express-session')({
 //Route middlewares
 var employeeRoute = require("./routes/employeeRoutes");
 var homeRoutes = require("./routes/homeRoutes");
-var userRoutes = require("./routes/userRoutes");
+var registrationRoute = require("./routes/registrationRoutes");
 var customerRoutes = require("./routes/customerRoutes");
+var logoutRoutes = require('./routes/logoutRoutes');
+var loginRoutes = require('./routes/loginRoutes');
 
 //Instantiation
 const app = express();
@@ -52,7 +54,9 @@ app.set("views", "./views");
 
 //        Routes
 app.use("/", homeRoutes);
-app.use("/users", userRoutes);
+app.use("/login", loginRoutes);
+app.use("/logout", logoutRoutes);
+app.use("/registerUser", registrationRoute);
 app.use("/employee", employeeRoute);
 app.use("/customer", customerRoutes);
 
