@@ -3,7 +3,11 @@ block content
   .md-content.md-layout.nav-bar.md-theme-default
     .md-layout.md-layout-nowrap
       h2  Employee List
-  .md-layout.md-layout-nowrap
+  .md-layout.md-layout-nowrap    
+    form.example(action='/employee/search' style='margin:auto;max-width:300px')
+      input(type='text' placeholder='employee search..' name='employee_type')
+      button(type='submit')
+        i.fa.fa-search
     table#customer_list
       thead
         tr
@@ -31,5 +35,3 @@ block content
                   form(method="POST" action='/employee/delete')
                     input(type="hidden", placeholder="", name="id", value=employee._id)
                     button.btn.btn-dark.btn-block(type="submit") Delete
-
-        

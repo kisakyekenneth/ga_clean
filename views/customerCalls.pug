@@ -1,83 +1,60 @@
 extends layout
-block content     
-    .md-content.md-layout.nav-bar.md-theme-default
-        .container            
-            h2.text-center.top-buffer NodeJS User Registration Tutorial
-            form.form-horizontal(role="form", method="post")
-                .form-group
-                .alert.alert-danger(role='alert', id="msgDiv")
-
-                .form-group
-                label.col-sm-3.control-label(for="fullname") 
-                strong Full Name
-                .col-sm-9
-                    input#fullname.form-control(type="text" placeholder="Full Name" autofocus="" value="")
-                .form-group
-                label.col-sm-3.control-label(for="email") 
-                strong Email
-                .col-sm-9
-                    input#email.form-control(type="email" placeholder="Email")
-                .form-group
-                label.col-sm-3.control-label(for="password") 
-                strong Password
-                .col-sm-9
-                    input#password.form-control(type="password" placeholder="Password")
-                .form-group
-                label.col-sm-3.control-label(for="cpassword") 
-                strong Confirm Password
-                .col-sm-9
-                    input#cpassword.form-control(type="password" placeholder="Confirm password")
-                .form-group
-                label.col-sm-9.control-label(for="dob") 
-                strong Date of Birth
-                .col-sm-9
-                    input#dob.form-control(type="date")
-                .form-group
-                label.col-sm-3.control-label(for="country") 
-                strong Country
-                .col-sm-9
-                    select#country.form-control
-                    option(value='') Please Select
-                    option USA
-                    option United Kingdom  
-                    option Germany
-                    option Denmark
-                    option Ecuador
-                    option Canada
-                    option France
-                    option Others
-                .form-group
-                label.control-label.col-sm-3 
-                strong Gender
-                .col-sm-6
-                    .row
-                    .col-sm-6
-                        label.radio-inline
-                        input#femaleRadio(name="gender" type="radio" value="Female")
-                        | &nbsp;Female
-                    .col-sm-4
-                        label.radio-inline
-                        input#maleRadio(name="gender" type="radio" value="Male")
-                        | &nbsp;Male              
-                .form-group
-                label.control-label.col-sm-9 
-                strong Meal Preference
-                .col-sm-9
-                    .checkbox
-                    label
-                        input#calorieCheckbox(type="checkbox" value="Calorie" name="calorie")
-                        | &nbsp;Low calorie
-                    .checkbox
-                    label
-                        input#saltCheckbox(type="checkbox" value="Salt"  name="salt")
-                        | &nbsp;Low salt
-                .form-group
-                .col-sm-9.col-sm-offset-3
-                    .checkbox
-                    label
-                        input#terms(type="checkbox" value="yes" name="terms")
-                        | &nbsp;I accept 
-                        a(href="#") terms
-                .form-group
-                .col-sm-9.col-sm-offset-3
-                    button#register.btn.btn-primary.btn-block(type="e") Register
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      .form-style-2-heading Record Customer calls
+  .md-layout.md-layout-nowrap
+    .form-style-2      
+      form(action='/employee' method='POST' enctype="multipart/form-data" )
+        label(for='customerName')
+          span
+            | Customer Name 
+            span.required *
+          input.input-field(type='text' name='customerName' value='')
+        label(for='location')
+          span
+            | Location 
+            span.required *
+          input.input-field(type='text' name='location' value='')
+        label(for='nin')
+          span
+            | NIN  
+            span.required *
+          input.input-field(type='text' name='nin' value='')
+        label(for='time_requested')
+          span
+            | Time requested
+            span.required *
+          input.input-field(type='text' name='time_requested' value='')
+        label(for='type_of_request')
+          span Type of Request
+          select.select-field(name='type_of_request')
+            option(value='One Time') One Time
+            option(value='Subscription') Subscription
+        label
+          span Telephone
+          input.tel-number-field.phone_field1(type='text' name='tel_no_1' value='+256' maxlength='4')
+          | -
+          input.tel-number-field.phone_field2(type='text' name='tel_no_2' value='' maxlength='3')
+          | -
+          input.tel-number-field.phone_field2(type='text' name='tel_no_3' value='' maxlength='6')
+        label(for='employee_type')
+          span Number of Trucks
+          select.select-field(name='no_of_trucks')
+            option(value='1') 1
+            option(value='2') 2
+        label Services Requested
+        .chckboxes
+          .option1
+            label.checkbox-inline
+              input#inlineCheckbox1(type='checkbox' value='Garbage Collection' name='service_requested')
+              span.checkbox_labels Garbage &nbsp &nbsp
+          .option2
+            label.checkbox-inline
+              input#inlineCheckbox2(type='checkbox' value='sewage' name='service_requested')
+              span.checkbox_labels Sewage &nbsp &nbsp 
+        br
+        br
+        label
+          span  
+          input#button_submit(type='submit' value='Submit')
