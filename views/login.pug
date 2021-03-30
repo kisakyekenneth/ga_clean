@@ -10,7 +10,7 @@ head
 h2 StayClean Initiative
 #container.container
   .form-container.sign-up-container
-    form(method='POST' action='/users' )
+    form(method='POST' action='/registerUser' )
       h1 Create Account
       .social-container
         a.social(href='#')
@@ -25,7 +25,7 @@ h2 StayClean Initiative
       input(type='password' placeholder='Password' name='password')
       button(type='submit') Register
   .form-container.sign-in-container
-    form(method='POST' action='/users/login' )
+    form(method='POST' action='/login' )
       h1 Sign in
       .social-container
         a.social(href='#')
