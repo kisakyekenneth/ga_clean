@@ -3,7 +3,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 require("dotenv").config(); //Required to work with .env file
+//For authentication
+const passport = require('passport');
+const userModel = require('./models/users');
 
+//require express session
+const expressSession = require('express-session')({
+  secret: 'HolyWeek',
+  resave: false,
+  saveUninitialized: false
+});
 //require('../models/EmployeeRegist');
 
 //Route middlewares
@@ -25,6 +34,15 @@ app.use(
     extended: true
   })
 );
+//Passport
+app.use(passport.initialize()); //initialize it along with its session authentication middleware,
+app.use(passport.session());
+
+//Passport local authentication
+passport.use(userModel.createStrategy());
+
+passport.serializeUser(userModel.serializeUser());
+passport.deserializeUser(userModel.deserializeUser());
 
 //Set view Enginee
 app.set("view engine", "pug");
@@ -41,16 +59,7 @@ app.get("*", (req, res) => {
   res.send("Error Page, route doesnot exist")
 })
 
-//Mongo database connection using Mongoose
-// mongoose.connect(
-//   process.env.DB_URL, {
-//     useNewUrlParser: true
-//   },
-//   () => {
-//     console.log("Connected to the DB");
-//   }
-// );
-
+//Database Connection
 mongoose.connect(process.env.LOCAL_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true

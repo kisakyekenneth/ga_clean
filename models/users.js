@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = mongoose.Schema({
     user_id: {
@@ -18,34 +19,9 @@ const userSchema = mongoose.Schema({
     }
 })
 
-// userSchema.pre('save', async function (next) {
-//     //Hash the password before saving the model
-//     const user = this;
-//     if (user.isModified('password')) {
-//         user.password = await bcrypt.hash(user.password, 8);
-//     }
-//     next();
-// })
-
-userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({
-        email
-    })
-    if (!user) {
-        throw new Error({
-            error: 'Invalid login credentials'
-        })
-    }
-
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-        throw new Error({
-            error: 'Invalid login credentials'
-        })
-    }
-    return user;
-}
-
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: 'email'
+});
 const User = mongoose.model('User', userSchema)
 
 module.exports = User;
