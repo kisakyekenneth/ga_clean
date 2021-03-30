@@ -1,6 +1,9 @@
 const express = require("express");
 const route = express.Router();
-const multer = require('multer');
+const multer = require("multer");
+var moment = require("moment");
+
+const Employee = require("../models/EmployeeRegist");
 
 route.get("/", (req, res) => {
   res.render("createEmployee", {
@@ -21,13 +24,90 @@ var upload = multer({
   storage: storage
 });
 
-route.post("/", upload.single("imageupload"), (req, res) => {
+route.post("/", upload.single("imageupload"), async (req, res) => {
   try {
-    console.log(req.file);
-    res.send(req.file);
-  } catch (err) {
-    res.send(400);
+    const employee = new Employee(req.body);
+    employee.imageupload = req.file.path;
+    employee.telephone =
+      req.body.tel_no_1 + req.body.tel_no_2 + req.body.tel_no_3;
+    var fomatted_date = moment(req.body.date_of_birth).format("DD/MM/YYYY");
+    console.log(fomatted_date);
+
+    employee.date_of_birth = fomatted_date;
+    employee.save();
+    res.redirect("/employee/list");
+  } catch (error) {
+    console.log(error);
+    res.send("Sorry! Something went wrong.");
   }
 });
+
+route.get("/list", async (req, res) => {
+  try {
+    // find all the data in the Employee collection
+    const employeeDetails = await Employee.find();
+
+    res.render("employeeList", {
+      employees: employeeDetails,
+      title: "Employee List"
+    });
+  } catch (err) {
+    res.send("Failed to retrive employee details");
+  }
+});
+
+//delete and employee record from the database
+route.post("/delete", async (req, res) => {
+  try {
+    await Employee.deleteOne({
+      _id: req.body.id
+    });
+    res.redirect("back");
+  } catch (err) {
+    res.status(400).send("Unable to delete item in the database");
+  }
+});
+
+//Retrieve Employee details to be updated
+route.get("/update/:id", async (req, res) => {
+  try {
+    const updateEmployee = await Employee.findOne({
+      _id: req.params.id
+    });
+    res.render("updateEmployee", {
+      employee: updateEmployee
+    });
+  } catch (err) {
+    res.status(400).send("Unable to find item in the database");
+  }
+});
+
+// Save the updated employee information
+route.post("/update", async (req, res) => {
+  try {
+    await Employee.findOneAndUpdate({
+        _id: req.query.id
+      },
+      req.body
+    );
+    res.redirect("/employee/list");
+  } catch (err) {
+    res.status(404).send("Unable to update item in the database");
+  }
+});
+
+//Search employee details
+route.post("/search", async (req, res) => {
+  try {
+    const employee_filter = await Employee.findOne({
+      _id: req.query.name
+    });
+    res.render("employeeList", {
+      employee: employee_filter
+    });
+  } catch (err) {
+    res.status(404).send("Unable to update item in the database");
+  }
+})
 
 module.exports = route;
