@@ -4,7 +4,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   meta(http-equiv='X-UA-Compatible' content='ie=edge')  
   style
-    include  ../public/css/login.css
+    include  ../public/css/login.css  
 
   title=title
 h2 StayClean Initiative
@@ -35,10 +35,16 @@ h2 StayClean Initiative
         a.social(href='#')
           i.fab.fa-linkedin-in
       span or use your account
+
+      label#error-message
+      if (error && error.length > 0)
+        label#error-message #{error}
+        
       input(type='email' placeholder='Email' name="email")
-      input(type='password' placeholder='Password' name="password")
+      input(type='password' placeholder='Password' name="password")   
       a(href='#') Forgot your password?
       button(type='submit') Sign In
+      
   .overlay-container
     .overlay
       .overlay-panel.overlay-left
@@ -53,4 +59,4 @@ h2 StayClean Initiative
 script(src='https://kit.fontawesome.com/a9023fd836.js' crossorigin='anonymous')
 
 script
-  include ../public/js/login.js
+  include ../public/js/login.js  

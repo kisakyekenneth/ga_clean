@@ -7,18 +7,23 @@ const passport = require("passport");
 
 const route = express.Router();
 
+var msg = "failed to login"
 
-// checks username and password using passport
+
+// Checks username and password using passport. FailureRedirect:'back' makes user stay on the same page
 route.post(
     "/",
     passport.authenticate("local", {
-        failureRedirect: "/"
+        failureRedirect: "back",
+        failureFlash: 'Invalid userEmail or password.',
+        successFlash: 'Welcome!'
     }),
     (req, res) => {
+
         req.session.user = req.user;
         res.redirect("/customer");
     }
 );
 
-
+//  failureRedirect: "/?success=true&message=Logged In Successfully"
 module.exports = route;

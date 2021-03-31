@@ -7,6 +7,9 @@ require("dotenv").config(); //Required to work with .env file
 const passport = require('passport');
 const userModel = require('./models/users');
 
+//Connect-flash
+const flash = require('connect-flash');
+
 //require express session
 const expressSession = require('express-session')({
   secret: 'HolyWeek',
@@ -37,6 +40,9 @@ app.use(
   })
 );
 
+// Flash messages middleware
+app.use(flash())
+
 //Passport and Express-session to create session on success login
 app.use(expressSession);
 app.use(passport.initialize()); //initialize it along with its session authentication middleware,
@@ -44,6 +50,13 @@ app.use(passport.session());
 
 //Passport local authentication
 passport.use(userModel.createStrategy());
+
+//Gloabl variables for Passport
+app.use(function (req, res, next) {
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
 
 passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
