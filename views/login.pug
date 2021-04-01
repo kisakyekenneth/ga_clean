@@ -25,7 +25,7 @@ h2 StayClean Initiative
       input(type='password' placeholder='Password' name='password')
       button(type='submit') Register
   .form-container.sign-in-container
-    form(method='POST' action='/login' )
+    form(method='POST' action='/login' name='login_form')
       h1 Sign in
       .social-container
         a.social(href='#')
@@ -35,15 +35,15 @@ h2 StayClean Initiative
         a.social(href='#')
           i.fab.fa-linkedin-in
       span or use your account
-
-      label#error-message
+      
       if (error && error.length > 0)
         label#error-message #{error}
-        
+
       input(type='email' placeholder='Email' name="email")
       input(type='password' placeholder='Password' name="password")   
       a(href='#') Forgot your password?
-      button(type='submit') Sign In
+      button(type='submit' onclick='validation();') Sign In
+      label#error-message2
       
   .overlay-container
     .overlay
@@ -58,5 +58,6 @@ h2 StayClean Initiative
 
 script(src='https://kit.fontawesome.com/a9023fd836.js' crossorigin='anonymous')
 
-script
-  include ../public/js/login.js  
+//- Since public is alreay registered as a static folder, don't include it in the path
+script(src='/js/login.js')
+script(src='/js/loginRegValidate.js')

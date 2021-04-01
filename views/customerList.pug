@@ -7,27 +7,31 @@ block content
     table#customer_list
       thead
         tr
-          th Customer Name
+          th  Customer Name
           th  Location 
-          th  Service Need
-          th  Trucks needed 
-          th  Time 
-          th  Tel Phone 
+          th  Nin
+          th  Telephone 
+          th  Time of request 
           th  Request type 
+          th  Service Request
+          th  Number of trucks
+          th
+          th
       tbody
-        tr
-          td  Kenneth 
-          td  Kajjansi 
-          td  Sewage, toilet empty
-          td  2 
-          td  11-March-2021 11:32AM
-          td  0771999999 
-          td  Subscription
-        tr
-          td  Opio 
-          td  Mutundwe 
-          td  Rubbish, toilet empty
-          td  2 
-          td  9-March-2021 8:00AM
-          td  0700111222 
-          td  One time
+        if customerCall.length
+        each orders in customerCall
+            tr  
+                td #{orders.customerName}
+                td #{orders.location}
+                td #{orders.nin}
+                td #{orders.telephone}
+                td #{orders.time_requested}
+                td #{orders.type_of_request}
+                td #{orders.service_requested}
+                td #{orders.no_of_trucks}
+                td
+                    a(href='/employee/update/'+orders._id) Update 
+                td
+                  form(method="POST" action='/employee/delete')
+                    input(type="hidden", placeholder="", name="id", value=orders._id)
+                    button.btn.btn-dark.btn-block(type="submit") Delete

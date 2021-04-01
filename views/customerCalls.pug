@@ -5,7 +5,7 @@ block content
       .form-style-2-heading Record Customer calls
   .md-layout.md-layout-nowrap
     .form-style-2      
-      form(action='/employee' method='POST' enctype="multipart/form-data" )
+      form(action='/customer' method='POST')
         label(for='customerName')
           span
             | Customer Name 
@@ -25,7 +25,7 @@ block content
           span
             | Time requested
             span.required *
-          input.input-field(type='text' name='time_requested' value='')
+          input.input-field(type='time' name='time_requested' value='')
         label(for='type_of_request')
           span Type of Request
           select.select-field(name='type_of_request')
