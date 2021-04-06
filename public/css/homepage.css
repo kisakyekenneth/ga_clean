@@ -129,6 +129,7 @@ div {
 
 }
 
+
 /* Table */
 #customer_list {
     font-family: Arial, Helvetica, sans-serif;
@@ -362,4 +363,6 @@ form.example::after {
     display: table;
 }
 
-<
+a {
+    text-decoration: none;
+}

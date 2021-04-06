@@ -1,0 +1,65 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap      
+      h4
+        a(href='#' style="border-bottom: 4px solid #ac43ac;") Register Truck &nbsp
+      h4  | &nbsp
+      h4
+        a(href='/truck/list') Truck List &nbsp
+  .md-layout.md-layout-nowrap   
+    .form-style-2      
+      form(action='/truck' method='POST')
+        label(for='Truck RegNo')
+          span
+            | Truck RegNo 
+            span.required *
+          input.input-field(type='text' name='truckRegNo' value='')
+        label(for='Truck Code')
+          span
+            | Truck Code 
+            span.required *
+          input.input-field(type='text' name='truckCode' value='')
+        label(for='truck location')
+          span
+            | Current Location 
+            span.required *
+          input.input-field(type='text' name='clocation' placeholder='non' value='') 
+        label(for='destination')
+          span
+            | Destination 
+            span.required *
+          input.input-field(type='text' name='destination' placeholder='non' value='') 
+        label(for='service_type')
+          span Service type
+          select.select-field(name='service_type')
+            option(value='garbage') Garbage
+            option(value='sewage') Sewage
+        label(for='driverName')
+          span Assign Driver
+          select.select-field(name='driverName')            
+            if drivers.length
+            each driver in drivers  
+              option(value=driver._id) #{driver.userName}
+
+        label(for='conductors')
+          span
+            | No. of Conductors 
+            span.required *
+          input.input-field(type='text' name='conductors' placeholder='1' value='')
+
+        label(for='earning')
+          span
+            | Earnings 
+            span.required *
+          input.input-field(type='text' name='earning' value=0)
+        label
+          span  
+          input#button_submit(type='submit' value='Submit')
+        label#error-message
+//- script
+//-   if(info) {
+//-   const errorMessage = document.getElementById("error-message");
+//-   errorMessage.innerText = info;
+//-   errorMessage.style.display = "block";
+//-   }

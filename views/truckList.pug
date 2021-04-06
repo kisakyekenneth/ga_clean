@@ -1,0 +1,40 @@
+extends layout
+block content   
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h4
+        a(href='/truck' ) Register Truck &nbsp
+      h4  | &nbsp
+      h4
+        a(href='#' style="border-bottom: 4px solid #ac43ac;") Truck List &nbsp
+  .md-layout.md-layout-nowrap    
+   
+    table#customer_list
+      thead
+        tr
+          th   Driver Name
+          th   Truck RegNo 
+          th   Truck Code
+          th   Current_location 
+          th   Destination
+          th   Service
+          th   status
+          th
+          th
+      tbody
+        if trucks_details.length
+        each truck in trucks_details
+            tr  
+                td #{truck.driverName}
+                td #{truck.truckRegNo}
+                td #{truck.truckCode}
+                td #{truck.clocation}
+                td #{truck.destination}
+                td #{truck.service_type}
+                td #{truck.status}
+                td
+                    a(href='/truck/update/'+truck._id) Update 
+                td
+                  form(method="POST" action='/truck/delete')
+                    input(type="hidden", placeholder="", name="id", value=truck._id)
+                    button.btn.btn-dark.btn-block(type="submit") Delete

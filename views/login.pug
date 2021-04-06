@@ -4,7 +4,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   meta(http-equiv='X-UA-Compatible' content='ie=edge')  
   style
-    include  ../public/css/login.css  
+    include  ../public/css/login.css   
 
   title=title
 h2 StayClean Initiative
@@ -42,7 +42,7 @@ h2 StayClean Initiative
       input(type='email' placeholder='Email' name="email")
       input(type='password' placeholder='Password' name="password")   
       a(href='#') Forgot your password?
-      button(type='submit' onclick='validation();') Sign In
+      button#logIn(type='submit') Sign In
       label#error-message2
       
   .overlay-container
@@ -60,4 +60,3 @@ script(src='https://kit.fontawesome.com/a9023fd836.js' crossorigin='anonymous')
 
 //- Since public is alreay registered as a static folder, don't include it in the path
 script(src='/js/login.js')
-script(src='/js/loginRegValidate.js')

@@ -11,7 +11,7 @@ route.get("/", (req, res) => {
       title: "Employee Registration"
     });
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 });
 
@@ -46,7 +46,7 @@ route.post("/", upload.single("imageupload"), async (req, res) => {
       res.send("Sorry! Something went wrong.");
     }
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 });
 
@@ -64,7 +64,7 @@ route.get("/list", async (req, res) => {
       res.send("Failed to retrive employee details");
     }
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 });
 
@@ -80,7 +80,7 @@ route.post("/delete", async (req, res) => {
       res.status(400).send("Unable to delete item in the database");
     }
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 });
 
@@ -98,7 +98,7 @@ route.get("/update/:id", async (req, res) => {
       res.status(400).send("Unable to find item in the database");
     }
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 });
 
@@ -106,7 +106,8 @@ route.get("/update/:id", async (req, res) => {
 route.post("/update", async (req, res) => {
   if (req.session.user) {
     try {
-      await Employee.findOneAndUpdate({
+      await Employee.findOneAndUpdate(
+        {
           _id: req.query.id
         },
         req.body
@@ -115,8 +116,9 @@ route.post("/update", async (req, res) => {
     } catch (err) {
       res.status(404).send("Unable to update item in the database");
     }
+    script((src = "/js/loginRegValidate.js"));
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 });
 
@@ -124,18 +126,20 @@ route.post("/update", async (req, res) => {
 route.post("/search", async (req, res) => {
   if (req.session.user) {
     try {
-      const employee_filter = await Employee.findOne({
-        _id: req.query.name
+      const employee_filter = await Employee.find({
+        employee_type: req.body.employee_type
       });
+      // res.send(employee_filter);
       res.render("employee_list", {
-        employee: employee_filter
+        employees: employee_filter,
+        title: "Employee List"
       });
     } catch (err) {
       res.status(404).send("Unable to update item in the database");
     }
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
-})
+});
 
 module.exports = route;

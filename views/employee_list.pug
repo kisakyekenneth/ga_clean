@@ -2,12 +2,18 @@ extends layout
 block content   
   .md-content.md-layout.nav-bar.md-theme-default
     .md-layout.md-layout-nowrap
-      h2  Employee List
-  .md-layout.md-layout-nowrap    
-    form.example(action='/employee/search' style='margin:auto;max-width:300px')
-      input(type='text' placeholder='employee search..' name='employee_type')
-      button(type='submit')
-        i.fa.fa-search
+      h4  Employee List &nbsp
+      h4  | &nbsp
+      h4
+         a(href='/conductor/list') Conductor List
+      h4  | &nbsp
+      h4
+         a(href='/truck/list') Truck List  
+  form.example(action='/employee/search' method='POST')
+    input(type='text' placeholder='Search..' name='employee_type' style='width: 30%')
+    button(type='submit' style='width:60px') search
+
+  .md-layout.md-layout-nowrap      
     table#customer_list
       thead
         tr
@@ -17,6 +23,7 @@ block content
           th  Date of birth 
           th  Employee type 
           th  Contact
+          th  Status
           th
           th  
       tbody
@@ -29,6 +36,7 @@ block content
                 td #{employee.date_of_birth}
                 td #{employee.employee_type}
                 td #{employee.telephone}
+                td #{employee.status_assign}
                 td
                     a(href='/employee/update/'+employee._id) Update 
                 td

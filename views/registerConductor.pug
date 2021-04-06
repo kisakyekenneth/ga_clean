@@ -1,0 +1,42 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h4
+        a(href='/employee') Register Driver &nbsp
+      h4  | &nbsp
+      h4
+        a(href='#' style="border-bottom: 4px solid #ac43ac;") Register Conductor &nbsp
+     
+  .md-layout.md-layout-nowrap
+    .form-style-2      
+      form(action='/conductor' method='POST' enctype="multipart/form-data" )
+        label(for='conductorName')
+          span
+            | Name 
+            span.required *
+          input.input-field(type='text' name='conductorName' value='')
+        label(for='nin_number')
+          span
+            | NIN 
+            span.required *
+          input.input-field(type='text' name='nin_number' value='')
+        label(for='residence')
+          span
+            | Residence 
+            span.required *
+          input.input-field(type='text' name='residence' value='')       
+        label(for='onboard_date')
+          span
+            | Date of Birth 
+            span.required *
+          input.input-field(type='date' name='date_of_birth' value='' max='2002-12-31')        
+        br      
+        br
+        input#myFile(type='file' name='imageupload')      
+        br
+        br
+        label
+          span  
+          input#button_submit(type='submit' value='Submit')
+        <label id="error-message"></label>

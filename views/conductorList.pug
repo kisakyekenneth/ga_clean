@@ -1,0 +1,38 @@
+extends layout
+block content   
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h4
+        a(href='/employee/list') Employee List  &nbsp
+      h4  | &nbsp
+      h4
+         a(href='#') Conductor List 
+
+  form.example(action='#' method='POST')
+    input(type='text' placeholder='Search..' name='employee_type' style='width: 30%')
+    button(type='submit' style='width:60px') search
+  .md-layout.md-layout-nowrap    
+   
+    table#customer_list
+      thead
+        tr
+          th  conductor Name
+          th  NIN 
+          th  Residence
+          th  Date of birth 
+          th
+          th  
+      tbody
+        if conductors.length
+        each conductor in conductors
+            tr  
+                td #{conductor.conductorName}
+                td #{conductor.nin_number}
+                td #{conductor.residence}
+                td #{conductor.date_of_birth}
+                td
+                    a(href='/conductor/update/'+conductor._id) Update 
+                td
+                  form(method="POST" action='/conductor/delete')
+                    input(type="hidden", placeholder="", name="id", value=conductor._id)
+                    button.btn.btn-dark.btn-block(type="submit") Delete

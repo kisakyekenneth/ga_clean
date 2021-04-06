@@ -1,17 +1,12 @@
-var username = document.login_form.email;
-var errorMessage = document.getElementById("error-message2");
+const loginBtn = document.getElementById('logIn');
+const errorMessage = document.getElementById("error-message2");
+const usernam = document.getElementById("useremail")
 
+loginBtn.addEventListener('click', () => {
+    if (usernam.value == "") {
 
-var name_fun = () => {
-    if (username.value == "") {
         errorMessage.innerText = "Please populate the email field";
         errorMessage.style.display = "block";
         return false;
     }
-}
-
-let validation = () => {
-
-    name_fun();
-
-}
+})

@@ -1,9 +1,14 @@
 extends layout
 block content    
   .md-content.md-layout.nav-bar.md-theme-default
-    .md-layout.md-layout-nowrap
-      .form-style-2-heading Provide Employee information
-  .md-layout.md-layout-nowrap
+    .md-layout.md-layout-nowrap      
+      h4
+        a(href='#' style="border-bottom: 4px solid #ac43ac;") Register Driver &nbsp
+      h4  | &nbsp
+      h4
+        a(href='/conductor') Register Conductor &nbsp
+      
+  .md-layout.md-layout-nowrap   
     .form-style-2      
       form(action='/employee' method='POST' enctype="multipart/form-data" )
         label(for='userName')
@@ -30,7 +35,7 @@ block content
           span
             | Date of Birth 
             span.required *
-          input.input-field(type='date' name='date_of_birth' value='')
+          input.input-field(type='date' name='date_of_birth' value='' max='1990-12-31')
         label
           span Telephone
           input.tel-number-field.phone_field1(type='text' name='tel_no_1' value='+256' maxlength='4')
@@ -41,7 +46,7 @@ block content
         label(for='employee_type')
           span Employee
           select.select-field(name='employee_type')
-            option(value='Truck Driver') Driver
+            option(value='Driver') Driver
             option(value='conductor') Conductor
         label Past incidences
         .chckboxes

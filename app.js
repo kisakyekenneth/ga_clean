@@ -25,6 +25,8 @@ var registrationRoute = require("./routes/registrationRoutes");
 var customerRoutes = require("./routes/customerRoutes");
 var logoutRoutes = require('./routes/logoutRoutes');
 var loginRoutes = require('./routes/loginRoutes');
+var conductorRoutes = require('./routes/conductorRoutes');
+var truckRoutes = require('./routes/truckRoutes');
 
 //Instantiation
 const app = express();
@@ -72,6 +74,8 @@ app.use("/logout", logoutRoutes);
 app.use("/registerUser", registrationRoute);
 app.use("/employee", employeeRoute);
 app.use("/customer", customerRoutes);
+app.use("/conductor", conductorRoutes);
+app.use("/truck", truckRoutes);
 
 //Non existing routes
 app.get("*", (req, res) => {

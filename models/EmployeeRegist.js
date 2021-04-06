@@ -26,23 +26,13 @@ const employeeSchema = mongoose.Schema({
     type: String,
     required: "Please select the role(Driver or conductor)"
   },
-  past_incidences: [
-    {
-      type: String
-    }
-  ],
+  past_incidences: [{
+    type: String
+  }],
   imageupload: String,
-  tel_no_1: {
+  status_assign: {
     type: String,
-    required: "Please provide Default phone code"
-  },
-  tel_no_2: {
-    type: String,
-    required: "Please provide Default phone digit"
-  },
-  tel_no_3: {
-    type: String,
-    required: "Please provide the rest of phone number details"
+    default: "not_assigned"
   },
   telephone: {
     type: String,

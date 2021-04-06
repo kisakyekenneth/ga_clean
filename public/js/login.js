@@ -9,10 +9,3 @@ signUpButton.addEventListener('click', () => {
 signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
 });
-
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('success') && urlParams.get('success')) {
-    const errorMessage = document.getElementById("error-message");
-    errorMessage.innerText = `${message}`;
-    errorMessage.style.display = "block";
-}
