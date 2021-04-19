@@ -26,11 +26,11 @@ block content
             | Time requested
             span.required *
           input.input-field(type='time' name='time_requested' value='')
-        label(for='type_of_request')
-          span Type of Request
-          select.select-field(name='type_of_request')
-            option(value='One Time') One Time
-            option(value='Subscription') Subscription
+        //- label(for='type_of_request')
+        //-   span Type of Request
+        //-   select.select-field(name='type_of_request')
+        //-     option(value='One Time') One Time
+        //-     option(value='Subscription') Subscription
         label
           span Telephone
           input.tel-number-field.phone_field1(type='text' name='tel_no_1' value='+256' maxlength='4')
@@ -43,18 +43,18 @@ block content
           select.select-field(name='no_of_trucks')
             option(value='1') 1
             option(value='2') 2
-        label Services Requested
-        .chckboxes
-          .option1
-            label.checkbox-inline
-              input#inlineCheckbox1(type='checkbox' value='Garbage Collection' name='service_requested')
-              span.checkbox_labels Garbage &nbsp &nbsp
-          .option2
-            label.checkbox-inline
-              input#inlineCheckbox2(type='checkbox' value='sewage' name='service_requested')
-              span.checkbox_labels Sewage &nbsp &nbsp 
-        br
-        br
+
+          p 
+            span (Please select desired service type below)
+        label(for='sewage Service')
+          span Service request
+          select.select-field(name='desired_service')
+            option(value="default") --Select desired service -- 
+            option(value='sewage_onetime') Sewage oneTime
+            option(value='sewage_subscription') Sewage Subscription
+            option(value='garbage_onetime') Garbage oneTime
+            option(value='garbage_subscription') Garbage Subscription
+
         label
           span  
           input#button_submit(type='submit' value='Submit')

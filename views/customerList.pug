@@ -11,10 +11,12 @@ block content
           th  Location 
           th  Nin
           th  Telephone 
-          th  Time of request 
-          th  Request type 
+          th  Time of request           
           th  Service Request
-          th  Number of trucks
+          th  No. of trucks
+          th  Status
+          th  Progress
+          th
           th
           th
       tbody
@@ -25,13 +27,16 @@ block content
                 td #{orders.location}
                 td #{orders.nin}
                 td #{orders.telephone}
-                td #{orders.time_requested}
-                td #{orders.type_of_request}
-                td #{orders.service_requested}
+                td #{orders.time_requested}                
+                td #{orders.desired_service}
                 td #{orders.no_of_trucks}
+                td #{orders.status}
+                td #{orders.progress}
                 td
-                    a(href='/employee/update/'+orders._id) Update 
+                    a(href='/customer/assign/'+orders._id) Assign
                 td
-                  form(method="POST" action='/employee/delete')
+                    a(href='/customer/update/'+orders._id) Update 
+                td
+                  form(method="POST" action='/customer/delete')
                     input(type="hidden", placeholder="", name="id", value=orders._id)
                     button.btn.btn-dark.btn-block(type="submit") Delete
