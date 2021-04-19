@@ -366,3 +366,34 @@ form.example::after {
 a {
     text-decoration: none;
 }
+
+/* Service css */
+.controls {
+    display: flex;
+}
+
+.control {
+    display: flex;
+}
+
+.radio {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
