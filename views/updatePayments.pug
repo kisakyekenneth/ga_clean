@@ -1,0 +1,39 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      p Provide cost of the services 
+  .md-layout.md-layout-nowrap   
+    .form-style-2      
+      form(action='/payments/update?id='+servicePayments._id method='POST')
+        label(for='sewage_weekily')
+          span
+            | Sewage Weekily 
+            span.required *
+          input.input-field(type='text' name='sewage_weekily' value=servicePayments.sewage_weekily)
+        label(for='sewage_weekily')
+          span
+            | Sewage (Discount) 
+            span.required *
+          input.input-field(type='text' name='discount_sewage' value=servicePayments.discount_sewage)
+        label(for='garbage_weekily')
+          span
+            | Garbage Weekily 
+            span.required *
+          input.input-field(type='text' name='garbage_weekily' value=servicePayments.garbage_weekily)
+        label(for='garbage_weekily')
+          span
+            | Garbage (Discount) 
+            span.required *
+          input.input-field(type='text' name='discount_garbage' value=servicePayments.discount_garbage)
+       
+        label
+          span  
+          input#button_submit(type='submit' value='Update')
+        label#error-message
+//- script
+//-   if(info) {
+//-   const errorMessage = document.getElementById("error-message");
+//-   errorMessage.innerText = info;
+//-   errorMessage.style.display = "block";
+//-   }

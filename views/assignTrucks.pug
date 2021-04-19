@@ -1,0 +1,35 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      .form-style-2-heading Record Customer calls
+  .md-layout.md-layout-nowrap
+    .form-style-2      
+      form(action='/customer/assign?id='+customersOrders._id method='POST')
+        label(for='customerName')
+          span
+            | Customer Name 
+            span.required *
+          input.input-field(type='text' name='customerName' value=customersOrders.customerName)
+        label(for='location')
+          span
+            | Location 
+            span.required *
+          input.input-field(type='text' name='location' value=customersOrders.location)
+        label(for='contact')
+          span
+            | Contact  
+            span.required *
+          input.input-field(type='text' name='contact' value=customersOrders.telephone)
+        
+        label(for='Truck RegNo')
+          span Truck RegNo
+          select.select-field(name='truck_code')            
+            if trucks.length
+            each truck in trucks   
+              option(value=truck.truckCode) #{truck.truckRegNo + " ( " +truck.service_type + " )"}         
+               
+        label
+          span  
+          input#button_submit(type='submit' value='Assign')
+

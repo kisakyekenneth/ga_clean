@@ -1,0 +1,35 @@
+extends layout
+block content    
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      p Provide cost of the services 
+  .md-layout.md-layout-nowrap   
+    .form-style-2      
+      form(action='/payments' method='POST' name='payments' onSubmit="return validation();")
+        label#error-message
+        label(for='sewage_weekily')
+          span
+            | Sewage Weekily 
+            span.required *
+          input.input-field(type='text' name='sewage_weekily' value='' placeholder='Please provide the sewage fee for one time users')
+        label(for='garbage_weekily')
+          span
+            | Garbage Weekily 
+            span.required *
+          input.input-field(type='text' name='garbage_weekily' value='' placeholder='Please provide the Garbage fee for one time users')
+        label(for='discount_sewage')
+          span
+            | Discount (Sewage) 
+            span.required *
+          input.input-field(type='text' name='discount_sewage' value='' placeholder='Discount for those subscribing for the sewage service')
+        label(for='discount_garbage')
+          span
+            | Discount (Garbage) 
+            span.required *
+          input.input-field(type='text' name='discount_garbage' value='' placeholder='Discount for those subscribing for the Garbage service')
+       
+        label
+          span  
+          input#btn_submit(type='submit' value='Submit')
+          
+//- script(src='/js/orderValidator.js') 

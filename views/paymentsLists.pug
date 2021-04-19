@@ -1,0 +1,39 @@
+extends layout
+block content   
+  .md-content.md-layout.nav-bar.md-theme-default
+    .md-layout.md-layout-nowrap
+      h4
+        a(href='/payments' ) Payments Register &nbsp
+      h4  | &nbsp
+      
+      h4
+        a(href='#') Payments List &nbsp
+  .md-layout.md-layout-nowrap    
+   
+    table#customer_list
+      thead
+        tr
+          th   Sewage(Weekily)
+          th   Sewage(Subscription)
+          th   Sewage(Discount)
+          th   Garbage(Weekily)
+          th   Garbage(Subscription)
+          th   Garbage(Discount)            
+          th
+          th
+      tbody
+        if servicePayments.length
+        each payment in servicePayments
+            tr  
+                td #{payment.sewage_weekily}
+                td #{payment.sewage_subscription} 
+                td #{payment.discount_sewage}
+                td #{payment.garbage_weekily}
+                td #{payment.garbage_subscription} 
+                td #{payment.discount_garbage}                
+                td
+                    a(href='/payments/update/'+payment._id) Update 
+                td
+                  form(method="POST" action='/payments/delete')
+                    input(type="hidden", placeholder="", name="id", value=payment._id)
+                    button.btn.btn-dark.btn-block(type="submit") Delete
