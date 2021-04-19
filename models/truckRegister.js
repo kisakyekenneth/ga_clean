@@ -34,8 +34,7 @@ const truckRegisterSchema = mongoose.Schema({
     required: "Please Insert the service for this Vehicle"
   },
   status: {
-    type: String,
-    default: "available"
+    type: String
   }
 });
 
