@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ordersSchema = mongoose.Schema({
     customerName: {
         type: String,
-        required: "Please enter the name"
+        required: "Please enter customer Name"
     },
     nin: {
         type: String,
@@ -16,22 +16,27 @@ const ordersSchema = mongoose.Schema({
     },
     time_requested: {
         type: String,
-        required: "Please provide your Driver license Number"
-    },
-    type_of_request: {
-        type: String,
-        required: "Please provide employee date of Birth"
-    },
+        required: "Please provide time of request"
+    },    
     no_of_trucks: {
         type: String,
-        required: "Please select add number of desired trucks"
+        required: "Please add number of required trucks"
     },
-    service_requested: [{
-        type: String
-    }],
+    desired_service: {
+        type: String,
+        required: "Please provide the service required"
+    },
     telephone: {
         type: String,
         required: "Please provide phone number"
+    },
+    status: {
+        type: String,
+        default: 'no_truck'
+    },
+    progress: {
+        type: String,
+        default: 'created'
     }
 });
 
