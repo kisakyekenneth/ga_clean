@@ -47,6 +47,12 @@ head
             .md-button-content
               i.md-svg-loader.md-icon.md-icon-image
                 img(src='/images/truck.png', style='width: 35px; height: 35px;')
+
+        a.md-button.navbar-item.md-theme-default(href='/payments')
+          .md-ripple
+            .md-button-content
+              i.md-svg-loader.md-icon.md-icon-image
+                img(src='/images/salary.png', style='width: 35px; height: 35px;')
       // Finance section
       div
         a.md-button.navbar-item.md-theme-default(href='/logout')
@@ -56,3 +62,5 @@ head
                 img(src='/images/logout.png', style='width: 35px; height: 35px;')
   .md-layout-item.main-content
     block content
+
+script(src='/js/orderValidator.js') 
