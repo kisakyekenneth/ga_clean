@@ -27,6 +27,7 @@ var logoutRoutes = require('./routes/logoutRoutes');
 var loginRoutes = require('./routes/loginRoutes');
 var conductorRoutes = require('./routes/conductorRoutes');
 var truckRoutes = require('./routes/truckRoutes');
+var paymentsRoutes = require('./routes/paymentsRoutes');
 
 //Instantiation
 const app = express();
@@ -76,6 +77,7 @@ app.use("/employee", employeeRoute);
 app.use("/customer", customerRoutes);
 app.use("/conductor", conductorRoutes);
 app.use("/truck", truckRoutes);
+app.use("/payments", paymentsRoutes)
 
 //Non existing routes
 app.get("*", (req, res) => {
@@ -85,7 +87,8 @@ app.get("*", (req, res) => {
 //Database Connection
 mongoose.connect(process.env.LOCAL_DB, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true 
 });
 
 mongoose.connection
