@@ -5,12 +5,14 @@ block content
       .form-style-2-heading Record Customer calls
   .md-layout.md-layout-nowrap
     .form-style-2      
-      form(action='/customer' method='POST')
+      form(action='/customer' method='POST' name='customerCalls' onSubmit="return orders_validation(event);")
+        label#error-message 
         label(for='customerName')
           span
             | Customer Name 
             span.required *
-          input.input-field(type='text' name='customerName' value='')
+          input.input-field(type='text' name='customer_name' value='')
+          label#error-cName 
         label(for='location')
           span
             | Location 
@@ -25,12 +27,7 @@ block content
           span
             | Time requested
             span.required *
-          input.input-field(type='time' name='time_requested' value='')
-        //- label(for='type_of_request')
-        //-   span Type of Request
-        //-   select.select-field(name='type_of_request')
-        //-     option(value='One Time') One Time
-        //-     option(value='Subscription') Subscription
+          input.input-field(type='time' name='time_requested' value='' )        
         label
           span Telephone
           input.tel-number-field.phone_field1(type='text' name='tel_no_1' value='+256' maxlength='4')
@@ -41,6 +38,7 @@ block content
         label(for='employee_type')
           span Number of Trucks
           select.select-field(name='no_of_trucks')
+            option(value="default") --Select No. of conductors --
             option(value='1') 1
             option(value='2') 2
 
@@ -58,3 +56,4 @@ block content
         label
           span  
           input#button_submit(type='submit' value='Submit')
+

@@ -24,6 +24,7 @@ block content
           th  Employee type 
           th  Contact
           th  Status
+          th  Earnings
           th
           th  
       tbody
@@ -37,6 +38,7 @@ block content
                 td #{employee.employee_type}
                 td #{employee.telephone}
                 td #{employee.status_assign}
+                td #{employee.earnings}
                 td
                     a(href='/employee/update/'+employee._id) Update 
                 td

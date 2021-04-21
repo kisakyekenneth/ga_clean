@@ -37,6 +37,10 @@ const employeeSchema = mongoose.Schema({
   telephone: {
     type: String,
     required: "Please provide phone number"
+  },
+  earnings: {
+    type: Number,
+    default: 0
   }
 });
 

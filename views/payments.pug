@@ -12,22 +12,25 @@ block content
             | Sewage Weekily 
             span.required *
           input.input-field(type='text' name='sewage_weekily' value='' placeholder='Please provide the sewage fee for one time users')
+          label#error-sewageFee
         label(for='garbage_weekily')
           span
             | Garbage Weekily 
             span.required *
           input.input-field(type='text' name='garbage_weekily' value='' placeholder='Please provide the Garbage fee for one time users')
+          label#error-garbage
         label(for='discount_sewage')
           span
             | Discount (Sewage) 
             span.required *
           input.input-field(type='text' name='discount_sewage' value='' placeholder='Discount for those subscribing for the sewage service')
+          label#error-sewageDiscount
         label(for='discount_garbage')
           span
             | Discount (Garbage) 
             span.required *
           input.input-field(type='text' name='discount_garbage' value='' placeholder='Discount for those subscribing for the Garbage service')
-       
+          label#error-garbageDiscount
         label
           span  
           input#btn_submit(type='submit' value='Submit')
